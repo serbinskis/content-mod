@@ -2,7 +2,7 @@
 <h3 align="center">Content Mod</h3>
 <p align="center">The original mod was <a href="https://github.com/DXXNS/Content-Warning-Cheat">Content-Warning-Cheat</a><br/><br/></p>
 
-![image](https://github.com/DXXNS/Content-Warning-Cheat/assets/108888172/ea1b6a39-d1b1-4a21-8473-43f4687c8023)
+![image](https://i.imgur.com/6DMRUOS.png)
 
 ### Installation
 
