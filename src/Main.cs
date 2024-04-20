@@ -67,6 +67,7 @@ namespace ContentMod
         private void OnSceneUnloaded(Scene scene)
         {
             SceneManager.sceneUnloaded -= OnSceneUnloaded;
+            ContentHarmony.UnpatchAll();
             ContentStatic.Save();
         }
 
