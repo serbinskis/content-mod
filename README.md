@@ -37,6 +37,7 @@
 - Infinite Battery
 - Infinite Camera Time
 - Anti Ragdoll
+- Anti Fall
 - Prevent Death (Doesn't work always)
 - Ignore Webs
 - Player Speed
