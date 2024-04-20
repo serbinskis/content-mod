@@ -21,7 +21,7 @@ namespace ContentMod
         public static ContentModule<bool> preventDeath = new ContentModule<bool>("preventDeath", "Prevent Death", false, KeyCode.None, ContentStatic.GUIType.TOGGLE);
         public static ContentModule<bool> ignoreWebs = new ContentModule<bool>("ignoreWebs", "Ignore Webs", false, KeyCode.None, ContentStatic.GUIType.TOGGLE);
         public static ContentModule<float> movementSpeed = new ContentModule<float>("movementSpeed", "Movement Speed", 2.3f, 2.3f, 10f, KeyCode.None, null);
-        public static ContentModule<float> pushForce = new ContentModule<float>("pushForce", "Push Force", 0.25f, 0.25f, 10f, KeyCode.None, null);
+        public static ContentModule<float> pushForce = new ContentModule<float>("pushForce", "Push Force", 0.25f, 0.25f, 100f, KeyCode.None, null);
         public static ContentModule<string> pushPlayer = new ContentModule<string>("pushPlayer", "Push Player", "", KeyCode.None, ContentStatic.GUIType.BUTTON, () => TakeDamageAndAddForce(0f, pushForce.GetValue(), 2.5f));
         public static ContentModule<string> killPlayer = new ContentModule<string>("killPlayer", "Kill Player", "", KeyCode.None, ContentStatic.GUIType.BUTTON, () => TakeDamageAndAddForce(9999999f, 0.25f, 2.5f));
         public static ContentModule<bool> revive = new ContentModule<bool>("revive", "Revive Yourself", false, KeyCode.None, ContentStatic.GUIType.BUTTON, () => revive.SetValue(true));

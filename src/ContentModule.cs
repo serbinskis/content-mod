@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -161,6 +162,7 @@ namespace ContentMod
             if (File.Exists(ContentStatic.STATES_FILENAME) && (ContentMisc.saveSettings.GetValue() || (ContentMisc.saveSettings.GetId().Equals(this.GetId()))))
             {
                 Dictionary<string, string> moduleStates = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(ContentStatic.STATES_FILENAME));
+                if (typeof(T) == typeof(float)) { moduleStates[id] = moduleStates[id].Replace(",", "."); }
                 if (moduleStates.ContainsKey(id)) { try { SetValue((T) Convert.ChangeType(moduleStates[id], typeof(T))); } catch { } }
             }
 
