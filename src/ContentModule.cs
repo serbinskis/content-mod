@@ -179,6 +179,7 @@ namespace ContentMod
         public void Save()
         {
             ContentStatic.ModuleStates[id] = Convert.ToString(value);
+            if (typeof(T) == typeof(float)) { ContentStatic.ModuleStates[id] = ContentStatic.ModuleStates[id]; }
             ContentStatic.ModuleKeys[id] = key;
         }
     }

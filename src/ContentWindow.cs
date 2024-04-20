@@ -42,7 +42,7 @@ namespace ContentMod
                 {
                     ContentModule<float> fmod = (ContentModule<float>) mod;
                     GUILayout.Space(5);
-                    GUILayout.Label(mod.GetName() + ": " + fmod.GetValue());
+                    GUILayout.Label(mod.GetName() + ": " + fmod.GetValue().ToString().Replace(",", "."));
                     float speed = GUILayout.HorizontalSlider(fmod.GetValue(), fmod.GetMinValue(), fmod.GetMaxValue());
                     fmod.SetValue(speed);
                     GUILayout.Space(5);
