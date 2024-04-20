@@ -1,5 +1,7 @@
-﻿using Steamworks;
+﻿using Photon.Pun;
+using Steamworks;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using WebSocketSharp;
@@ -14,11 +16,12 @@ namespace ContentMod
         public static ContentModule<bool> toggleMenu = new ContentModule<bool>("toggleMenu", "Toggle Menu", false, KeyCode.RightControl, ContentStatic.GUIType.TOGGLE).SetShowInHud(false);
         public static ContentModule<bool> toggleHud = new ContentModule<bool>("toggleHud", "Toggle Hud", true, KeyCode.Delete, ContentStatic.GUIType.TOGGLE).SetShowInHud(false);
         public static ContentModule<bool> introScreen = new ContentModule<bool>("introScreen", "Disable Intro Screen", true, KeyCode.Delete, ContentStatic.GUIType.TOGGLE).SetShowInHud(false);
+        public static ContentModule<bool> infiniteShop = new ContentModule<bool>("infiniteShop", "Infinite Shop", false, KeyCode.Delete, ContentStatic.GUIType.TOGGLE);
         public static ContentModule<string> requestLobbyList = new ContentModule<string>("requestLobbyList", "Request Lobby List", "", KeyCode.None, ContentStatic.GUIType.BUTTON, () => SteamMatchmaking.RequestLobbyList());
         public static ContentModule<string> joinRandomLobby = new ContentModule<string>("joinRandomLobby", "Join Random Lobby", "", KeyCode.None, ContentStatic.GUIType.BUTTON, () => JoinRandomLobby());
         public static ContentModule<bool> openConsole = new ContentModule<bool>("openConsole", "Open Console", false, KeyCode.None, ContentStatic.GUIType.BUTTON, () => OpenConsole(true));
         public static ContentModule<string> closeConsole = new ContentModule<string>("closeConsole", "Close Console", "", KeyCode.None, ContentStatic.GUIType.BUTTON, () => OpenConsole(false));
-        public static List<IContentModule> contentMods = new List<IContentModule> { saveSettings, toggleMenu, toggleHud, introScreen, requestLobbyList, joinRandomLobby, openConsole, closeConsole };
+        public static List<IContentModule> contentMods = new List<IContentModule> { saveSettings, toggleMenu, toggleHud, introScreen, infiniteShop, requestLobbyList, joinRandomLobby, openConsole, closeConsole };
         private static Vector2 scrollPosition;
 
         public static void Load() {
@@ -54,18 +57,6 @@ namespace ContentMod
             }
         }
 
-        [HarmonyLib.HarmonyPatch(typeof(IntroScreenAnimator), "Start")]
-        public static class IntroScreenAnimatorStartPatch
-        {
-            public static bool Prefix(IntroScreenAnimator __instance)
-            {
-                if (!introScreen.GetValue()) { return true; }
-                __instance.skipping = true;
-                __instance.m_animator.enabled = false;
-                return true;
-            }
-        }
-
         public static bool IsMainMenuReady() {
             try
             {
@@ -88,6 +79,46 @@ namespace ContentMod
                 return TitleText;
             }
             catch { return null; }
+        }
+
+        [HarmonyLib.HarmonyPatch(typeof(IntroScreenAnimator), "Start")]
+        private static class IntroScreenAnimator_Start
+        {
+            private static bool Prefix(IntroScreenAnimator __instance)
+            {
+                if (!introScreen.GetValue()) { return true; }
+                __instance.skipping = true;
+                __instance.m_animator.enabled = false;
+                return true;
+            }
+        }
+
+        [HarmonyLib.HarmonyPatch(typeof(ShopHandler), "OnAddToCartItemClicked")]
+        private static class ShopHandler_OnAddToCartItemClicked
+        {
+            private static bool Prefix(ShopHandler __instance, byte itemID, Dictionary<byte, ShopItem> ___m_ItemsForSaleDictionary, PhotonView ___m_PhotonView)
+            {
+                if (!infiniteShop.GetValue()) { return true; }
+                if (!___m_ItemsForSaleDictionary.ContainsKey(itemID)) { return true; }
+                ___m_PhotonView.RPC("RPCA_AddItemToCart", 0, new object[] { itemID });
+                __instance.addSFX.Play(__instance.transform.position, false, 1f, null);
+                return false;
+            }
+        }
+
+        [HarmonyLib.HarmonyPatch(typeof(ShopHandler), "OnOrderCartClicked")]
+        private static class ShopHandler_OnOrderCartClicked
+        {
+            private static bool Prefix(ShopHandler __instance, ShoppingCart ___m_ShoppingCart, PhotonView ___m_PhotonView)
+            {
+                if (!infiniteShop.GetValue()) { return true; }
+                if (___m_ShoppingCart.IsEmpty) { return true; }
+                __instance.purchaseSFX.Play(__instance.transform.position, false, 1f, null);
+                byte[] array = Enumerable.ToArray<byte>(Enumerable.Select<ShopItem, byte>(___m_ShoppingCart.Cart, delegate (ShopItem item) { ShopItem shopItem = item; return shopItem.ItemID; }));
+                ___m_PhotonView.RPC("RPCA_SpawnDrone", 0, new object[] { array });
+                __instance.OnClearCartClicked();
+                return false;
+            }
         }
     }
 }

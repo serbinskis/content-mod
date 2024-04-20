@@ -62,6 +62,7 @@
 - Toggle Menu
 - Toggle Hud
 - Disable Intro Screen
+- Infinite Shop
 - Join Random Lobby
 - Open Console
 - Close Console
