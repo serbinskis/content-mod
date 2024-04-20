@@ -16,6 +16,7 @@ namespace ContentMod
         public static ContentModule<bool> infinitesShockStick = new ContentModule<bool>("infinitesShockStick", "Infinite Shock Stick", false, KeyCode.None, ContentStatic.GUIType.TOGGLE);
         public static ContentModule<bool> infiniteBattery = new ContentModule<bool>("infiniteBattery", "Infinite Battery", false, KeyCode.None, ContentStatic.GUIType.TOGGLE);
         public static ContentModule<bool> infiniteCameraTime = new ContentModule<bool>("infiniteCameraTime", "Infinite Camera Time", false, KeyCode.None, ContentStatic.GUIType.TOGGLE);
+        public static ContentModule<bool> antiFall = new ContentModule<bool>("antiFall", "Anti Fall", false, KeyCode.None, ContentStatic.GUIType.TOGGLE);
         public static ContentModule<bool> antiRagdoll = new ContentModule<bool>("antiRagdoll", "Anti Ragdoll", false, KeyCode.None, ContentStatic.GUIType.TOGGLE);
         public static ContentModule<bool> preventDeath = new ContentModule<bool>("preventDeath", "Prevent Death", false, KeyCode.None, ContentStatic.GUIType.TOGGLE);
         public static ContentModule<bool> ignoreWebs = new ContentModule<bool>("ignoreWebs", "Ignore Webs", false, KeyCode.None, ContentStatic.GUIType.TOGGLE);
@@ -25,7 +26,7 @@ namespace ContentMod
         public static ContentModule<string> killPlayer = new ContentModule<string>("killPlayer", "Kill Player", "", KeyCode.None, ContentStatic.GUIType.BUTTON, () => TakeDamageAndAddForce(9999999f, 0.25f, 2.5f));
         public static ContentModule<bool> revive = new ContentModule<bool>("revive", "Revive Yourself", false, KeyCode.None, ContentStatic.GUIType.BUTTON, () => revive.SetValue(true));
         public static ContentModule<string> addMoney = new ContentModule<string>("addMoney", "Add 1000 Money (Host Only)", "", KeyCode.None, ContentStatic.GUIType.BUTTON, () => SurfaceNetworkHandler.RoomStats.AddMoney(1000));
-        public static List<IContentModule> contentMods = new List<IContentModule> { infiniteHeal, infiniteOxygen, infiniteStamina, infiniteJump, infinitesShockStick, infiniteBattery, infiniteCameraTime, antiRagdoll, preventDeath, ignoreWebs, movementSpeed, pushForce, pushPlayer, killPlayer, revive, addMoney };
+        public static List<IContentModule> contentMods = new List<IContentModule> { infiniteHeal, infiniteOxygen, infiniteStamina, infiniteJump, infinitesShockStick, infiniteBattery, infiniteCameraTime, antiFall, antiRagdoll, preventDeath, ignoreWebs, movementSpeed, pushForce, pushPlayer, killPlayer, revive, addMoney };
         private static Vector2 scrollPosition;
 
         public static void Load() {
@@ -72,6 +73,11 @@ namespace ContentMod
             {
                 try { Player.localPlayer.refs.ragdoll.force = 0f; } catch { };
                 try { Player.localPlayer.refs.ragdoll.torque = 0f; } catch { };
+            }
+
+            if (antiFall.GetValue())
+            {
+                try { Player.localPlayer.data.fallTime = 0f; } catch { };
             }
 
             if (ignoreWebs.GetValue())
