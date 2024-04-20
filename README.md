@@ -55,7 +55,7 @@
 
 ### World
 - Spawn/Give custom Item (9 buttons, each for different item)
-- Spawn custom Monster
+- Spawn custom Monster (Host Only)
 
 ### Misc
 - Save Settings
