@@ -1,0 +1,5 @@
+/.vs
+/obj
+Output/*.dll
+Output/*.xml
+!Output/contentmod.dll
