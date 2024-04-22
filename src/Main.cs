@@ -43,6 +43,10 @@ namespace ContentMod
 
         public override void OnGUI()
         {
+            ContentESP.OnGUI();
+            ContentHud.DisplayUI();
+            if (!ContentMisc.toggleMenu.GetValue()) { return; }
+
             var customStyle = new GUIStyle(GUI.skin.window);
             customStyle.normal.background = MakeTexture(1, 1, new Color(0.1f, 0.1f, 0.1f, 1.0f));
             customStyle.focused.background = MakeTexture(1, 1, new Color(0.1f, 0.1f, 0.1f, 1.0f));
@@ -52,10 +56,6 @@ namespace ContentMod
             customStyle.focused.textColor = Color.white;
             customStyle.onNormal.textColor = Color.white;
             customStyle.hover.textColor = Color.white;
-
-            ContentHud.DisplayUI();
-            ContentESP.OnGUI();
-            if (!ContentMisc.toggleMenu.GetValue()) { return; }
             windowRect = GUI.Window(0, windowRect, ContentWindow.DisplayUI, "Content Warning", customStyle);
         }
 
