@@ -13,6 +13,7 @@ namespace ContentMod
         private static List<Flashlight> flashlights; // Make flashlights static
         private static List<Defib> defibs; // Add list for Defib objects
         private static List<ShockStick> shockSticks; // Add list for ShockStick objects
+        private static List<RescueHook> rescueHooks; // Add list for ShockStick objects
         private static List<Flare> flares; // Add list for Flare objects
         private static List<VideoCamera> videoCameras; // Add list for VideoCamera objects
         private static float timeSinceLastUpdate2 = 0.0f;
@@ -28,12 +29,16 @@ namespace ContentMod
                 flashlights = GameObject.FindObjectsOfType<Flashlight>().ToList();
                 defibs = GameObject.FindObjectsOfType<Defib>().ToList(); // Find all Defib objects
                 shockSticks = GameObject.FindObjectsOfType<ShockStick>().ToList(); // Find all ShockStick objects
+                rescueHooks = GameObject.FindObjectsOfType<RescueHook>().ToList(); // Find all ShockStick objects
                 flares = GameObject.FindObjectsOfType<Flare>().ToList(); // Find all Flare objects
 
                 timeSinceLastUpdate = 0f;
             }
 
-            RunBattery();
+            RunBatteryForType(flashlights, typeof(Flashlight));
+            RunBatteryForType(defibs, typeof(Defib));
+            RunBatteryForType(shockSticks, typeof(ShockStick));
+            RunBatteryForType(rescueHooks, typeof(RescueHook));
             RunFlareLifeTime();
 
         }
@@ -96,18 +101,6 @@ namespace ContentMod
                     //MelonLogger.Error($"Failed to set timeLeft: {ex}");
                 }
             }
-        }
-
-        public static void RunBattery()
-        {
-            // Run for Flashlight objects
-            RunBatteryForType(flashlights, typeof(Flashlight));
-
-            // Run for Defib objects
-            RunBatteryForType(defibs, typeof(Defib));
-
-            // Run for ShockStick objects
-            RunBatteryForType(shockSticks, typeof(ShockStick));
         }
 
         private static void RunBatteryForType<T>(List<T> objects, Type type)
