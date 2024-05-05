@@ -26,7 +26,8 @@ namespace ContentMod
         public static ContentModule<string> killPlayer = new ContentModule<string>("killPlayer", "Kill Player", "", KeyCode.None, ContentStatic.GUIType.BUTTON, () => TakeDamageAndAddForce(9999999f, 0.25f, 2.5f));
         public static ContentModule<bool> revive = new ContentModule<bool>("revive", "Revive Yourself", false, KeyCode.None, ContentStatic.GUIType.BUTTON, () => revive.SetValue(true));
         public static ContentModule<string> addMoney = new ContentModule<string>("addMoney", "Add 1000 Money (Host Only)", "", KeyCode.None, ContentStatic.GUIType.BUTTON, () => SurfaceNetworkHandler.RoomStats.AddMoney(1000));
-        public static List<IContentModule> contentMods = new List<IContentModule> { infiniteHeal, infiniteOxygen, infiniteStamina, infiniteJump, infinitesShockStick, infiniteBattery, infiniteCameraTime, antiFall, antiRagdoll, preventDeath, ignoreWebs, movementSpeed, pushForce, pushPlayer, killPlayer, revive, addMoney };
+        public static ContentModule<string> addMeta = new ContentModule<string>("addMeta", "Add 1000 Meta Coins", "", KeyCode.None, ContentStatic.GUIType.BUTTON, () => MetaProgressionHandler.AddMetaCoins(1000));
+        public static List<IContentModule> contentMods = new List<IContentModule> { infiniteHeal, infiniteOxygen, infiniteStamina, infiniteJump, infinitesShockStick, infiniteBattery, infiniteCameraTime, antiFall, antiRagdoll, preventDeath, ignoreWebs, movementSpeed, pushForce, pushPlayer, killPlayer, revive, addMoney, addMeta };
         private static Vector2 scrollPosition;
 
         public static void Load() {

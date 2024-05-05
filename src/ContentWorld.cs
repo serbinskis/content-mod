@@ -8,7 +8,7 @@ namespace ContentMod
 {
     public static class ContentWorld
     {
-        public static List<string> monsterNames = new List<string> { "Player", "BarnacleBall", "BigSlap", "Bombs", "Dog", "Ear", "EyeGuy", "Flicker", "Ghost", "Jello", "Knifo", "Larva", "Mouthe", "Slurper", "Snatcho", "Spider", "Zombe", "Toolkit_Fan", "Toolkit_Hammer", "Toolkit_Iron", "Toolkit_Vaccuum", "Toolkit_Whisk", "Toolkit_Wisk", "Weeping", };
+        public static List<string> monsterNames = new List<string> { "Player", "Harpooner", "Puffo", "Wallo", "Streamer", "Worm", "RobotButton", "FireMonster", "CamCreep", "BlackHoleBot", "Mime", "BarnacleBall", "BigSlap", "Bombs", "Dog", "Ear", "EyeGuy", "Flicker", "Ghost", "Jello", "Knifo", "Larva", "Mouthe", "Slurper", "Snatcho", "Spider", "Zombe", "Toolkit_Fan", "Toolkit_Hammer", "Toolkit_Iron", "Toolkit_Vaccuum", "Toolkit_Whisk", "Toolkit_Wisk", "Weeping", };
         public static List<string> itemNames = ItemDatabase.Instance.lastLoadedItems.Select(item => item.name).ToList();
         public static ContentModule<string> selectItem1 = new ContentModule<string>("selectItem1", "Select Item 1", "", KeyCode.Mouse0, ContentStatic.GUIType.DROPDOWN).SetList(itemNames);
         public static ContentModule<string> spawnItem1 = new ContentModule<string>("spawnItem1", "Spawn Item 1", "", KeyCode.None, ContentStatic.GUIType.BUTTON, () => SpawnItem(selectItem1.GetValue()));
