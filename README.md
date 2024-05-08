@@ -45,6 +45,7 @@
 - Kill Players
 - Revive Yourself
 - Add 1000 Money (Host Only)
+- Add 1000 Meta Coins
 
 ### ESP
 - Player ESP
