@@ -22,7 +22,7 @@
 
 6. Run the Game
 
-7. Download mod dll [ContentMod.dll](https://github.com/WobbyChip/ContentMod/raw/master/Output/contentmod.dll)
+7. Download mod dll [ContentMod.dll](https://github.com/serbinskis/content-mod/raw/master/Output/contentmod.dll)
 
 8. Close the Game and put the .dll into the "Mods" folder (located in game files)
 
