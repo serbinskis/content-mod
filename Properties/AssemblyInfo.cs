@@ -3,9 +3,9 @@ using MelonLoader;
 
 [assembly: AssemblyTitle("ContentMod")]
 [assembly: AssemblyDescription("ContentMod")]
-[assembly: AssemblyCompany("WobbyChip")]
+[assembly: AssemblyCompany("Serbinskis")]
 [assembly: AssemblyProduct("ContentMod")]
-[assembly: AssemblyCopyright("by WobbyChip")]
+[assembly: AssemblyCopyright("by Serbinskis")]
 [assembly: AssemblyTrademark(ContentMod.BuildInfo.Company)]
 [assembly: AssemblyVersion(ContentMod.BuildInfo.Version)]
 [assembly: AssemblyFileVersion(ContentMod.BuildInfo.Version)]
