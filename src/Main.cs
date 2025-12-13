@@ -16,7 +16,7 @@ namespace ContentMod
 
     public class ContentMod : MelonMod
     {
-        public static HarmonyLib.Harmony ContentHarmony = new HarmonyLib.Harmony("com.wobbychip.contentmod");
+        public static HarmonyLib.Harmony ContentHarmony = new HarmonyLib.Harmony("com.serbinskis.contentmod");
         public static Rect windowRect = new Rect(20, 20, 400, 400);
         public static int sceneIndex = -1;
 
