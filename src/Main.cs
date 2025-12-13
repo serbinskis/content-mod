@@ -8,7 +8,7 @@ namespace ContentMod
     {
         public const string Name = "Content Mod";
         public const string Description = "A mod to cheat in Content Warning";
-        public const string Author = "WobbyChip/ DXXNS / SnickersIZ / Akira";
+        public const string Author = "Serbinskis / DXXNS / SnickersIZ / Akira";
         public const string Company = null;
         public const string Version = "0.0.13";
         public const string DownloadLink = null;
